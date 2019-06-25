@@ -2,6 +2,7 @@ package cn.graydove.blog.mapper;
 
 import cn.graydove.blog.pojo.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,6 +13,9 @@ public interface UserMapper {
 
     @Select("select * from user where username=#{username} and password=#{password}")
     User selUserByUsernameAndPassword(User user);
+
+    @Select("select * from user where user_id=#{0}")
+    User selUserByUserId(int userId);
 
     @Update("update user set password=#{password} where user_id=#{userId}")
     int updatePassword(User user);

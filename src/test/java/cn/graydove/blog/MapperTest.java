@@ -92,14 +92,13 @@ public class MapperTest {
         userMapper.updateMessage(user2);
         temp = userMapper.selUserByUsernameAndPassword(user2);
 
-
-        System.out.println(birth);
-        System.out.println(temp.getBirth());
-
         Assert.assertEquals(sex,temp.getSex());
         Assert.assertNotNull(temp.getBirth());
         Assert.assertEquals(sign,temp.getSign());
         Assert.assertEquals(nickname,temp.getNickname());
+
+        User t2 = userMapper.selUserByUserId(temp.getUserId());
+        Assert.assertEquals(t2,temp);
 
         int f1 = userMapper.getFansNumber(user1.getUserId());
         int f2 = userMapper.getFocusNumber(user2.getUserId());
@@ -138,6 +137,7 @@ public class MapperTest {
 
         Assert.assertEquals(c1,1);
         Assert.assertEquals(c2,1);
+
     }
 
 
