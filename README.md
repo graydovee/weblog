@@ -1,3 +1,4 @@
+
 # 短学期实践项目java后台
 
 ## 接口文档
@@ -9,8 +10,9 @@
 >* password | 密码
 
 ## 
-> 路由：/auth/login
+> 路由：/auth/register
 
 > 参数
 >* username | 用户名
 >* password | 密码
+>* nickname | 昵称
