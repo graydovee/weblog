@@ -21,4 +21,8 @@ public enum ServerStatus {
         this.reason = reason;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
 }

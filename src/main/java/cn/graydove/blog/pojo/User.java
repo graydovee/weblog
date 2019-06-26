@@ -12,6 +12,7 @@ import java.sql.Date;
 @ToString
 @EqualsAndHashCode
 public class User {
+    public final static String ROLE = "USER";
     private int userId;
     private String username;
     private String password;
