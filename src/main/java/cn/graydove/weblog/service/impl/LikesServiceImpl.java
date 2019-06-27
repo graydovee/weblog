@@ -3,10 +3,12 @@ package cn.graydove.weblog.service.impl;
 import cn.graydove.weblog.mapper.LikesMapper;
 import cn.graydove.weblog.pojo.User;
 import cn.graydove.weblog.service.LikesService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class LikesServiceImpl implements LikesService {
 
     @Resource

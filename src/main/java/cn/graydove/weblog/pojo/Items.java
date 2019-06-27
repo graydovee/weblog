@@ -18,4 +18,12 @@ public class Items {
     private String format;
     private Date createTime;
     private int folderId;
+
+    public String getFileName(){
+        return name+"."+format;
+    }
+
+    public String getStoreName(){
+        return uuid+"."+format;
+    }
 }

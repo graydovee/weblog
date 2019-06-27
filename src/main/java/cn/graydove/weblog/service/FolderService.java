@@ -11,6 +11,8 @@ public interface FolderService {
 
     List<Folder> selNotPrivateFolderByUserId(int userId);
 
+    Folder selFolderByFolderId(int FolderId);
+
     int insFloder(Folder folder) throws ParamException;
 
     int delFolderByFolderId(int folderId);

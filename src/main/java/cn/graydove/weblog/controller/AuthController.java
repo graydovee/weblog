@@ -2,28 +2,32 @@ package cn.graydove.weblog.controller;
 
 import cn.graydove.weblog.enums.ServerStatus;
 import cn.graydove.weblog.exceptions.ParamException;
+import cn.graydove.weblog.pojo.JwtUser;
 import cn.graydove.weblog.pojo.User;
 import cn.graydove.weblog.service.UserService;
+import cn.graydove.weblog.uitls.ReturnUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/auth")
 public class AuthController {
 
-    // 为了减少篇幅就不写service接口了
     @Autowired
     private UserService userService;
 
     @Autowired
+    @Qualifier("userDetailsServiceImpl")
+    private UserDetailsService userDetailsService;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @PostMapping("/register")
+    @PostMapping("/auth")
     public String registerUser(User user){
         log.info("register:"+user);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -32,10 +36,22 @@ public class AuthController {
             c = userService.insUser(user);
         } catch (ParamException e) {
             e.printStackTrace();
-            return ServerStatus.PARAM_ERROR.toString();
+            return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
         }
         if(c==1)
-            return ServerStatus.OK.toString();
-        return ServerStatus.SERVER_ERROR.toString();
+            return ReturnUtil.retJson(ServerStatus.OK);
+        return ReturnUtil.retJson(ServerStatus.SERVER_ERROR);
+    }
+
+
+    @GetMapping("/auth")
+    public String checkUsername(String username){
+        if(username==null || username.equals("")){
+            return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
+        }
+        if(((JwtUser)userDetailsService.loadUserByUsername(username)).getUser()==null){
+            return ReturnUtil.retJson(ServerStatus.OK);
+        }
+        return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
     }
 }

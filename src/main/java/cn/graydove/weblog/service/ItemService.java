@@ -11,4 +11,6 @@ public interface ItemService {
     int insItem(Items item);
 
     int delItemByItemId(int itemId);
+
+    Items selItemByItemsId(int itemsId);
 }

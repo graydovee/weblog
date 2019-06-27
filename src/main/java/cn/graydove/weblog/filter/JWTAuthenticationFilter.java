@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -64,7 +65,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 返回创建成功的token
         // 但是这里创建的token只是单纯的token
         // 按照jwt的规定，最后请求的格式应该是 `Bearer token`
+        response.setHeader("Access-Control-Expose-Headers","token");
+        response.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, token");
         response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
+//        Cookie cookie = new Cookie("token",token);
+//        cookie.setMaxAge((int)JwtTokenUtils.EXPIRATION*1000);
+//        response.addCookie(cookie);
     }
 
 }

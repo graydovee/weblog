@@ -23,4 +23,5 @@ public class User {
     private int sex;
     private Date birth;
     private String sign;
+    private String profilePicture;
 }

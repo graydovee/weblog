@@ -7,7 +7,8 @@ public enum ServerStatus {
     OK(200,"OK"),
     RESOURCE_NOT_FOUND(400,"resource not found"),
     SERVER_ERROR(500,"server error"),
-    PARAM_ERROR(501,"param error");
+    PARAM_ERROR(501,"param error"),
+    NULL_PARAM(502,"param is null");
 
     private int value;
     private String reason;

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    @Insert("insert into user values(default,#{username},#{password},#{nickname},null,null,null)")
+    @Insert("insert into user values(default,#{username},#{password},#{nickname},null,null,null,null)")
     int insUser(User user);
 
     @Select("select * from user where username=#{username} and password=#{password}")
@@ -28,6 +28,8 @@ public interface UserMapper {
     @Delete("delete from user where user_id=#{0}")
     int delUserByUserId(int id);
 
+    @Update("update user set profile_picture=#{pic} where user_id=#{id}")
+    int updPicture(@Param("pic") String profilePicture,@Param("id") int userId);
     //粉丝操作
 
     @Select("select * from user where user_id in (select focuser from fans where focused=#{0})")

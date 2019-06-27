@@ -26,6 +26,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User selUserByUserId(int userId) {
+        return userMapper.selUserByUserId(userId);
+    }
+
+
+    @Override
     public int insUser(User user) throws ParamException {
         if(user==null)
             throw new ParamException("user is null");
@@ -62,7 +68,7 @@ public class UserServiceImpl implements UserService {
                 u.setNickname(user.getNickname());
             }
             if(user.getSign()!=null){
-                u.setSign(u.getSign());
+                u.setSign(user.getSign());
             }
             u.setSex(user.getSex());
 

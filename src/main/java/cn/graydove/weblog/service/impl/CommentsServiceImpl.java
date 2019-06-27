@@ -4,10 +4,12 @@ import cn.graydove.weblog.exceptions.ParamException;
 import cn.graydove.weblog.mapper.CommentMapper;
 import cn.graydove.weblog.pojo.Comments;
 import cn.graydove.weblog.service.CommentsService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class CommentsServiceImpl implements CommentsService {
 
     @Resource

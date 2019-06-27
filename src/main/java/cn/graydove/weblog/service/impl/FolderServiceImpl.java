@@ -5,10 +5,12 @@ import cn.graydove.weblog.exceptions.ParamException;
 import cn.graydove.weblog.mapper.FolderMapper;
 import cn.graydove.weblog.pojo.Folder;
 import cn.graydove.weblog.service.FolderService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class FolderServiceImpl implements FolderService {
 
     @Resource
@@ -22,6 +24,11 @@ public class FolderServiceImpl implements FolderService {
     @Override
     public List<Folder> selNotPrivateFolderByUserId(int userId) {
         return folderMapper.selNotPrivateFolderByUserId(userId);
+    }
+
+    @Override
+    public Folder selFolderByFolderId(int FolderId) {
+        return folderMapper.selFolderByFolderId(FolderId);
     }
 
     @Override

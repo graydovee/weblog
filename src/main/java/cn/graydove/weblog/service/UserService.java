@@ -11,4 +11,6 @@ public interface UserService {
     int updPwd(int userId,String newPwd);
 
     int updMsg(User u) throws ParamException;
+
+    User selUserByUserId(int userId);
 }
