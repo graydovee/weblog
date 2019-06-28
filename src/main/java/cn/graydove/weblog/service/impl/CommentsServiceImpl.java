@@ -33,6 +33,11 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
+    public Comments selCommentsByCommentsId(int commentsId) {
+        return commentMapper.selCommentsByCommentsId(commentsId);
+    }
+
+    @Override
     public int delByCommentsId(int commentsId) {
         return commentMapper.delByCommentsId(commentsId);
     }

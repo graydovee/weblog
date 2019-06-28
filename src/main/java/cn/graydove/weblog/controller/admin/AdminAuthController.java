@@ -58,8 +58,9 @@ public class AdminAuthController {
     public String getPersonalInfo(String userId){
         User user = userService.selUserByUserId(Integer.parseInt(userId));
         if(user==null){
-            ReturnUtil.retJson(ServerStatus.NULL_PARAM);
+            return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
         }
+        user.setPassword(null);
         return ReturnUtil.retJson(user);
     }
 }

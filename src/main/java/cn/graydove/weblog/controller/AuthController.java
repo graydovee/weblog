@@ -49,9 +49,12 @@ public class AuthController {
         if(username==null || username.equals("")){
             return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
         }
-        if(((JwtUser)userDetailsService.loadUserByUsername(username)).getUser()==null){
+        User user = ((JwtUser)userDetailsService.loadUserByUsername(username)).getUser();
+        if(user==null){
             return ReturnUtil.retJson(ServerStatus.OK);
         }
-        return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
+
+        user.setPassword(null);
+        return ReturnUtil.retJson(user);
     }
 }

@@ -20,6 +20,9 @@ public interface CommentMapper {
     @Select("select * from comments where user_id=#{0}")
     List<Comments> selCommentsByUserId(int userId);
 
+    @Select("select * from comments where comments_id=#{0}")
+    Comments selCommentsByCommentsId(int commentsId);
+
     @Delete("delete from comments where comments_id=#{0}")
     int delByCommentsId(int commentsId);
 }

@@ -12,5 +12,7 @@ public interface CommentsService {
 
     List<Comments> selCommentsByUserId(int userId);
 
+    Comments selCommentsByCommentsId(int commentsId);
+
     int delByCommentsId(int commentsId);
 }
