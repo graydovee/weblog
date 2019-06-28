@@ -59,8 +59,9 @@ public class DownloadConctoller {
     }
 
     @GetMapping("/file")
-    public String getpubFile(int folderId,String password){
-        Folder folder = folderService.selFolderByFolderId(folderId);
+    public String getpubFile(int fileId,String password){
+        Items items = itemService.selItemByItemsId(fileId);
+        Folder folder = folderService.selFolderByFolderId(items.getFolderId());
 
         List<Items> list = null;
         switch (folder.getType()){
@@ -72,7 +73,7 @@ public class DownloadConctoller {
                 if(!folder.getPassword().equals(bCryptPasswordEncoder.encode(password)))
                     return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
             case Folder.PUBLIC:
-                list = itemService.selItemByFolderId(folderId);
+                list = itemService.selItemByFolderId(folder.getFolderId());
         }
         if(list!=null)
             return ReturnUtil.retJson(list);
