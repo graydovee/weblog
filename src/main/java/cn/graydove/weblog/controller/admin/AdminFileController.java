@@ -142,4 +142,30 @@ public class AdminFileController {
         }
         return ReturnUtil.retJson(ServerStatus.SERVER_ERROR);
     }
+
+
+    @DeleteMapping("/file")
+    public String download(int id,int userId){
+        Items items = itemService.selItemByItemsId(id);
+        if (items==null)
+            return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
+        Folder folder = folderService.selFolderByFolderId(items.getFolderId());
+        if(folder==null || folder.getUserId()!=userId){
+            return ReturnUtil.retJson(ServerStatus.FORBIDDEN);
+        }
+
+        int c = itemService.delItemByItemId(items.getItemsId());
+        if(c==0){
+            return ReturnUtil.retJson(ServerStatus.RESOURCE_NOT_FOUND);
+        }
+        File parent = new File(path);
+        if(parent.exists()&&parent.isDirectory()){
+            File file = new File(parent, items.getStoreName());
+            if(file.exists()) {
+                file.delete();
+            }
+
+        }
+        return ReturnUtil.retJson(ServerStatus.OK);
+    }
 }
