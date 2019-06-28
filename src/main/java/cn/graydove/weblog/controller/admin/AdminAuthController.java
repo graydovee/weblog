@@ -44,11 +44,17 @@ public class AdminAuthController {
     }
 
     @PutMapping("/auth")
-    public String updatePassword(String password,String userId){
-        if(password==null)
+    public String updatePassword(String oldPassword, String password,int userId){
+        if(password==null || oldPassword==null)
             return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
+        User user = userService.selUserByUserId(userId);
+        if(!user.getPassword().equals(bCryptPasswordEncoder.encode(oldPassword))){
+            ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
+        }
+
         password = bCryptPasswordEncoder.encode(password);
-        int c = userService.updPwd(Integer.parseInt(userId),password);
+
+        int c = userService.updPwd(userId,password);
         if(c>0)
             return ReturnUtil.retJson(ServerStatus.OK);
         return ReturnUtil.retJson(ServerStatus.SERVER_ERROR);
