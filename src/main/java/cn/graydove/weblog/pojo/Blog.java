@@ -13,8 +13,8 @@ import java.sql.Date;
 @EqualsAndHashCode
 public class Blog {
     private int blogId;
-    private String Content;
+    private String content;
     private Date createTime;
-    private int UserId;
+    private int userId;
 
 }

@@ -1,5 +1,6 @@
 package cn.graydove.weblog.controller;
 
+import cn.graydove.weblog.enums.ServerStatus;
 import cn.graydove.weblog.pojo.Folder;
 import cn.graydove.weblog.pojo.Items;
 import cn.graydove.weblog.service.FolderService;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -32,11 +34,11 @@ public class DownloadConctoller {
     @Value("${attachment.path}")
     private String path;
 
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
-//
-//    @Resource
-//    private FolderService folderService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Resource
+    private FolderService folderService;
 
     @Resource
     private ItemService itemService;
@@ -48,19 +50,33 @@ public class DownloadConctoller {
             return;
         }
         ReturnUtil.retFile(response,items,path);
+    }
 
-//        Folder folder = folderService.selFolderByFolderId(items.getFolderId());
-//        switch (folder.getType()){
-//            case Folder.PRIVATE :
-//                break;
-//            case Folder.PROTECTED:
-//                if(password==null)
-//                    break;
-//                if(!folder.getPassword().equals(bCryptPasswordEncoder.encode(password)))
-//                    break;
-//            case Folder.PUBLIC:
-//                ReturnUtil.retFile(response,items,path);
-//        }
+    @GetMapping("/folder")
+    public String getpubFolder(int userId){
+        List<Folder> folders = folderService.selNotPrivateFolderByUserId(userId);
+        return ReturnUtil.retJson(folders);
+    }
+
+    @GetMapping("/file")
+    public String getpubFile(int folderId,String password){
+        Folder folder = folderService.selFolderByFolderId(folderId);
+
+        List<Items> list = null;
+        switch (folder.getType()){
+            case Folder.PRIVATE :
+                return ReturnUtil.retJson(ServerStatus.FORBIDDEN);
+            case Folder.PROTECTED:
+                if(password==null)
+                    return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
+                if(!folder.getPassword().equals(bCryptPasswordEncoder.encode(password)))
+                    return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
+            case Folder.PUBLIC:
+                list = itemService.selItemByFolderId(folderId);
+        }
+        if(list!=null)
+            return ReturnUtil.retJson(list);
+        return ReturnUtil.retJson(ServerStatus.SERVER_ERROR);
     }
 
 //    @GetMapping("/admin/down/{id}")

@@ -19,7 +19,7 @@ public class Folder {
     private int folderId;
     private int userId;
     private String name;
-    private int Type;
+    private int type;
     private String password;
     private Date createTime;
 }

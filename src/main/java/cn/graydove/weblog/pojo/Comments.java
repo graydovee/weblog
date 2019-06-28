@@ -14,7 +14,7 @@ import java.sql.Date;
 public class Comments {
     private int commentsId;
     private String content;
-    private Date CreateTime;
+    private Date createTime;
     private int userId;
     private int blogId;
 }
