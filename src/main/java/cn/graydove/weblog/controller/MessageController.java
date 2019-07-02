@@ -63,7 +63,7 @@ public class MessageController {
 
     @GetMapping("/fans")
     public String getFans(int userId){
-        List<User> users = fansService.selFocusList(userId);
+        List<User> users = fansService.selFansList(userId);
         for(User u:users){
             u.setPassword(null);
         }

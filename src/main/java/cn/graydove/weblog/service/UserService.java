@@ -12,5 +12,7 @@ public interface UserService {
 
     int updMsg(User u) throws ParamException;
 
+    int updProfilePicture(String url,int id);
+
     User selUserByUserId(int userId);
 }

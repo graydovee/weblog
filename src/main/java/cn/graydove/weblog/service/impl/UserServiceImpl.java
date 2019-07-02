@@ -76,4 +76,9 @@ public class UserServiceImpl implements UserService {
         }
         return c;
     }
+
+    @Override
+    public int updProfilePicture(String url, int id) {
+        return userMapper.updPicture(url, id);
+    }
 }

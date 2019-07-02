@@ -22,6 +22,9 @@ public interface UserMapper {
     @Update("update user set password=#{password} where user_id=#{userId}")
     int updatePassword(User user);
 
+    @Update("update user set profile_picture=#{url} where user_id=#{id}")
+    int updateProfilePicture(@Param("url") String url, @Param("id") int id);
+
     @Update("update user set nickname=#{nickname},sex=#{sex},birth=#{birth},sign=#{sign} where user_id=#{userId}")
     int updateMessage(User user);
 

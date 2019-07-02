@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.sql.Date;
 
 @Slf4j
 @RestController
@@ -24,13 +25,25 @@ public class AdminAuthController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @PutMapping("/profile")
+    private String updateProfilePicture(String url,int userId){
+        if(url==null)
+            return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
+        int c = userService.updProfilePicture(url, userId);
+        if(c>0)
+            return ReturnUtil.retJson(ServerStatus.OK);
+        return ReturnUtil.retJson(ServerStatus.OK);
+    }
+
     @PostMapping("/auth")
-    public String updateMessage(User user, String userId){
+    public String updateMessage(User user,Long birthTime, String userId){
         if(user==null)
             return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
         log.info(user.toString());
 
         user.setUserId(Integer.parseInt(userId));
+        if(birthTime != null)
+            user.setBirth(new Date(birthTime));
         int c;
         try {
             c = userService.updMsg(user);

@@ -133,6 +133,14 @@
 >* profilePicture | 头像
 >* brith | 生日（毫秒数）
 
+### 更改头像
+> 路由：/admin/profile
+
+> 方法：put
+
+> 参数：
+>* url | 图片的url
+
 ### 更改密码
 > 路由：/admin/auth
 

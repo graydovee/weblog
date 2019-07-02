@@ -14,7 +14,7 @@ public interface BlogMapper {
     @Select("select * from blog where blog_id=#{0}")
     Blog selBlogByBlogId(int blogId);
 
-    @Select("select * from blog where user_id=#{0}")
+    @Select("select * from blog where user_id=#{0} order by blog_id desc")
     List<Blog> selBlogsByUserId(int userId);
 
     @Delete("delete from blog where blog_id=#{0}")
