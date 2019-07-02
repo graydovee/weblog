@@ -53,6 +53,15 @@ public class AuthController {
         if(user==null){
             return ReturnUtil.retJson(ServerStatus.OK);
         }
+        return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
+    }
+
+    @GetMapping("/user")
+    public String getUser(int userId){
+        User user = userService.selUserByUserId(userId);
+        if(user==null){
+            return ReturnUtil.retJson(ServerStatus.OK);
+        }
 
         user.setPassword(null);
         return ReturnUtil.retJson(user);
