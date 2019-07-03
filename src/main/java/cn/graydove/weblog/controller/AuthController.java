@@ -57,8 +57,8 @@ public class AuthController {
     }
 
     @GetMapping("/user")
-    public String getUser(int userId){
-        User user = userService.selUserByUserId(userId);
+    public String getUser(int id){
+        User user = userService.selUserByUserId(id);
         if(user==null){
             return ReturnUtil.retJson(ServerStatus.OK);
         }

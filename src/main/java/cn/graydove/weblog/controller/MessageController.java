@@ -34,10 +34,10 @@ public class MessageController {
     private LikesService likesService;
 
     @GetMapping("/blog")
-    public String blog(int userId){
-        if(userId<=0)
+    public String blog(int id){
+        if(id<=0)
             return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
-        List<Blog> blogs = blogService.selBlogsByUserId(userId);
+        List<Blog> blogs = blogService.selBlogsByUserId(id);
 
         return ReturnUtil.retJson(blogs);
     }
@@ -62,8 +62,8 @@ public class MessageController {
     }
 
     @GetMapping("/fans")
-    public String getFans(int userId){
-        List<User> users = fansService.selFansList(userId);
+    public String getFans(int id){
+        List<User> users = fansService.selFansList(id);
         for(User u:users){
             u.setPassword(null);
         }
@@ -71,8 +71,8 @@ public class MessageController {
     }
 
     @GetMapping("/focus")
-    public String getFocus(int userId){
-        List<User> users = fansService.selFocusList(userId);
+    public String getFocus(int id){
+        List<User> users = fansService.selFocusList(id);
         for(User u:users){
             u.setPassword(null);
         }

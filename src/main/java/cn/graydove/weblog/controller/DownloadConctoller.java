@@ -53,8 +53,8 @@ public class DownloadConctoller {
     }
 
     @GetMapping("/folder")
-    public String getpubFolder(int userId){
-        List<Folder> folders = folderService.selNotPrivateFolderByUserId(userId);
+    public String getpubFolder(int id){
+        List<Folder> folders = folderService.selNotPrivateFolderByUserId(id);
         return ReturnUtil.retJson(folders);
     }
 
