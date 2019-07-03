@@ -17,7 +17,7 @@ public class Items {
     private String name;
     private String format;
     private Date createTime;
-    private int folderId;
+    private int userId;
 
     public String getFileName(){
         return name+"."+format;

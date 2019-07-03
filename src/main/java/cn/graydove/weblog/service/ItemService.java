@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ItemService {
 
-    List<Items> selItemByFolderId(int FolderId);
+    List<Items> selItemByUserId(int userId);
 
     int insItem(Items item);
 

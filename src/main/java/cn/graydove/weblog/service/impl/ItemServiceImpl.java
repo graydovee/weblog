@@ -14,8 +14,8 @@ public class ItemServiceImpl implements ItemService {
     ItemMapper itemMapper;
 
     @Override
-    public List<Items> selItemByFolderId(int FolderId) {
-        return itemMapper.selItemByFolderId(FolderId);
+    public List<Items> selItemByUserId(int userId) {
+        return itemMapper.selItemByUserId(userId);
     }
 
     @Override

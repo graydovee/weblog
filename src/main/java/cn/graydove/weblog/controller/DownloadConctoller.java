@@ -1,29 +1,20 @@
 package cn.graydove.weblog.controller;
 
 import cn.graydove.weblog.enums.ServerStatus;
-import cn.graydove.weblog.pojo.Folder;
 import cn.graydove.weblog.pojo.Items;
-import cn.graydove.weblog.service.FolderService;
 import cn.graydove.weblog.service.ItemService;
 import cn.graydove.weblog.uitls.ReturnUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RestController
@@ -33,12 +24,12 @@ public class DownloadConctoller {
 
     @Value("${attachment.path}")
     private String path;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Resource
-    private FolderService folderService;
+//
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//
+//    @Resource
+//    private FolderService folderService;
 
     @Resource
     private ItemService itemService;
@@ -52,29 +43,30 @@ public class DownloadConctoller {
         ReturnUtil.retFile(response,items,path);
     }
 
-    @GetMapping("/folder")
-    public String getpubFolder(int id){
-        List<Folder> folders = folderService.selNotPrivateFolderByUserId(id);
-        return ReturnUtil.retJson(folders);
-    }
-
+//    @GetMapping("/folder")
+//    public String getpubFolder(int id){
+//        List<Folder> folders = folderService.selNotPrivateFolderByUserId(id);
+//        return ReturnUtil.retJson(folders);
+//    }
+//
     @GetMapping("/file")
-    public String getpubFile(int fileId,String password){
-        Items items = itemService.selItemByItemsId(fileId);
-        Folder folder = folderService.selFolderByFolderId(items.getFolderId());
-
-        List<Items> list = null;
-        switch (folder.getType()){
-            case Folder.PRIVATE :
-                return ReturnUtil.retJson(ServerStatus.FORBIDDEN);
-            case Folder.PROTECTED:
-                if(password==null)
-                    return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
-                if(!folder.getPassword().equals(bCryptPasswordEncoder.encode(password)))
-                    return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
-            case Folder.PUBLIC:
-                list = itemService.selItemByFolderId(folder.getFolderId());
-        }
+    public String getpubFile(int id){
+//        Items items = itemService.selItemByItemsId(fileId);
+//        Folder folder = folderService.selFolderByFolderId(items.getFolderId());
+//
+//        List<Items> list = null;
+//        switch (folder.getType()){
+//            case Folder.PRIVATE :
+//                return ReturnUtil.retJson(ServerStatus.FORBIDDEN);
+//            case Folder.PROTECTED:
+//                if(password==null)
+//                    return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
+//                if(!folder.getPassword().equals(bCryptPasswordEncoder.encode(password)))
+//                    return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
+//            case Folder.PUBLIC:
+//                list = itemService.selItemByFolderId(folder.getFolderId());
+//        }
+        List<Items> list = itemService.selItemByUserId(id);
         if(list!=null)
             return ReturnUtil.retJson(list);
         return ReturnUtil.retJson(ServerStatus.SERVER_ERROR);

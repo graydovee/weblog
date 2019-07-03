@@ -30,9 +30,9 @@ public class MapperTest {
 
     @Resource
     ItemMapper itemMapper;
-
-    @Resource
-    FolderMapper folderMapper;
+//
+//    @Resource
+//    FolderMapper folderMapper;
 
     @Resource
     LikesMapper likesMapper;
@@ -209,78 +209,78 @@ public class MapperTest {
 
     }
 
-    @Test
-    public void folderMapperTest(){
-        String name = "t1";
-        String pwd = "123321";
+//    @Test
+//    public void folderMapperTest(){
+//        String name = "t1";
+//        String pwd = "123321";
+//
+//        //测试新增
+//        Folder folder = new Folder();
+//        folder.setName(name);
+//        folder.setType(Folder.PRIVATE);
+//        folder.setPassword(pwd);
+//        folder.setUserId(1);
+//        int c = folderMapper.insFloder(folder);
+//        Assert.assertEquals(c,1);
+//
+//        //测试查询
+//
+//        List<Folder> folders = folderMapper.selNotPrivateFolderByUserId(1);
+//        Assert.assertEquals(folders.size(),0);
+//
+//        folders = folderMapper.selFolderByUserId(1);
+//        Assert.assertTrue(folders.size()>0);
+//
+//
+//        //测试改名
+//        Folder f = folders.get(0);
+//        f.setName("222");
+//        c = folderMapper.updFolderName(f);
+//        Assert.assertEquals(c,1);
+//
+//        folder = folderMapper.selFolderByUserId(1).get(0);
+//        Assert.assertEquals(folder.getName(),f.getName());
+//
+//
+//        //测试删除
+//
+//        c = folderMapper.delFolderByFolderId(folder.getFolderId());
+//        Assert.assertEquals(c,1);
+//        folders = folderMapper.selFolderByUserId(1);
+//        Assert.assertTrue(folders==null || folders.size()==0);
+//
+//
+//   }
 
-        //测试新增
-        Folder folder = new Folder();
-        folder.setName(name);
-        folder.setType(Folder.PRIVATE);
-        folder.setPassword(pwd);
-        folder.setUserId(1);
-        int c = folderMapper.insFloder(folder);
-        Assert.assertEquals(c,1);
-
-        //测试查询
-
-        List<Folder> folders = folderMapper.selNotPrivateFolderByUserId(1);
-        Assert.assertEquals(folders.size(),0);
-
-        folders = folderMapper.selFolderByUserId(1);
-        Assert.assertTrue(folders.size()>0);
-
-
-        //测试改名
-        Folder f = folders.get(0);
-        f.setName("222");
-        c = folderMapper.updFolderName(f);
-        Assert.assertEquals(c,1);
-
-        folder = folderMapper.selFolderByUserId(1).get(0);
-        Assert.assertEquals(folder.getName(),f.getName());
-
-
-        //测试删除
-
-        c = folderMapper.delFolderByFolderId(folder.getFolderId());
-        Assert.assertEquals(c,1);
-        folders = folderMapper.selFolderByUserId(1);
-        Assert.assertTrue(folders==null || folders.size()==0);
-
-
-   }
-
-   @Test
-    public void itemMapperTest(){
-        UUID uuid = UUID.randomUUID();
-        String name = "321a";
-        String format = "jpg";
-       //测试插入
-       Items item = new Items();
-       item.setFolderId(1);
-       item.setName(name);
-       item.setFormat(format);
-       item.setUuid(uuid.toString());
-       int c = itemMapper.insItem(item);
-       Assert.assertEquals(c,1);
-
-
-       //测试查询
-       List<Items> items = itemMapper.selItemByFolderId(1);
-       Assert.assertTrue(items.size()>0);
-       item = items.get(0);
-       Assert.assertEquals(item.getUuid(),uuid.toString());
-       Assert.assertEquals(item.getName(),name);
-       Assert.assertEquals(item.getFormat(),format);
-
-       //测试删除
-       c = itemMapper.delItemByItemId(item.getItemsId());
-       Assert.assertEquals(c,1);
-       items = itemMapper.selItemByFolderId(1);
-       Assert.assertTrue(items==null || items.size()==0);
-   }
+//   @Test
+//    public void itemMapperTest(){
+//        UUID uuid = UUID.randomUUID();
+//        String name = "321a";
+//        String format = "jpg";
+//       //测试插入
+//       Items item = new Items();
+//       item.setFolderId(1);
+//       item.setName(name);
+//       item.setFormat(format);
+//       item.setUuid(uuid.toString());
+//       int c = itemMapper.insItem(item);
+//       Assert.assertEquals(c,1);
+//
+//
+//       //测试查询
+//       List<Items> items = itemMapper.selItemByFolderId(1);
+//       Assert.assertTrue(items.size()>0);
+//       item = items.get(0);
+//       Assert.assertEquals(item.getUuid(),uuid.toString());
+//       Assert.assertEquals(item.getName(),name);
+//       Assert.assertEquals(item.getFormat(),format);
+//
+//       //测试删除
+//       c = itemMapper.delItemByItemId(item.getItemsId());
+//       Assert.assertEquals(c,1);
+//       items = itemMapper.selItemByFolderId(1);
+//       Assert.assertTrue(items==null || items.size()==0);
+//   }
 
    @Test
    public void likesMapperTest(){
