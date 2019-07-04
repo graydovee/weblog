@@ -25,8 +25,8 @@ public class AdminAuthController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @PutMapping("/profile")
-    private String updateProfilePicture(String url,int userId){
+    @PostMapping("/profile")
+    public String updateProfilePicture(String url,int userId){
         if(url==null)
             return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
         int c = userService.updProfilePicture(url, userId);

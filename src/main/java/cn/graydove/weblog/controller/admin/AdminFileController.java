@@ -32,59 +32,6 @@ public class AdminFileController {
     @Resource
     private ItemService itemService;
 
-//    @Resource
-//    private FolderService folderService;
-//
-//    /**
-//     * 创建文件夹
-//     */
-//    @PostMapping("/folder")
-//    public String createFolder(Folder folder,int userId){
-//        if(folder==null)
-//            return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
-//
-//        folder.setUserId(userId);
-//        if(folder.getType()==Folder.PROTECTED){
-//            String pwd = folder.getPassword();
-//            if(pwd==null)
-//                return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
-//            else
-//                folder.setPassword(bCryptPasswordEncoder.encode(pwd));
-//        }
-//        try {
-//            int c = folderService.insFloder(folder);
-//
-//            if(c>0)
-//                return ReturnUtil.retJson(ServerStatus.OK);
-//        } catch (ParamException e) {
-//            log.error(e.toString(), e);
-//            return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
-//        }
-//        return ReturnUtil.retJson(ServerStatus.SERVER_ERROR);
-//    }
-
-//    /**
-//     * 获取自己的所有文件夹
-//     */
-//    @GetMapping("/folder")
-//    public String getFolderList(int userId){
-//        List<Folder> folders= folderService.selFolderByUserId(userId);
-//        return ReturnUtil.retJson(folders);
-//    }
-
-//    /**
-//     * 获取自己的该文件夹所有的文件
-//     */
-//    @GetMapping("/file")
-//    public String getFileList(int folderId,int userId){
-//        Folder f = folderService.selFolderByFolderId(folderId);
-//        if(f==null || f.getUserId()!=userId)
-//            return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
-//
-//        List<Items> items= itemService.selItemByFolderId(folderId);
-//        return ReturnUtil.retJson(items);
-//    }
-
     /**
      * 上传文件
      */
@@ -105,18 +52,6 @@ public class AdminFileController {
         String suffix = fileName.substring(p+1);
         File dest = new File(parent.getAbsolutePath(),uuid+"."+suffix);
 
-
-//        List<Folder> list = folderService.selFolderByUserId(userId);
-//        Folder folder = null;
-//        for(Folder f:list){
-//            if(folderId.equals(f.getFolderId())){
-//                folder = f;
-//                break;
-//            }
-//        }
-
-//        if(folder==null)
-//            return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
 
         //存入数据库
         Items items = new Items();

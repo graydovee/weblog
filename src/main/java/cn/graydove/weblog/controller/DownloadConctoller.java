@@ -24,12 +24,6 @@ public class DownloadConctoller {
 
     @Value("${attachment.path}")
     private String path;
-//
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
-//
-//    @Resource
-//    private FolderService folderService;
 
     @Resource
     private ItemService itemService;
@@ -43,46 +37,12 @@ public class DownloadConctoller {
         ReturnUtil.retFile(response,items,path);
     }
 
-//    @GetMapping("/folder")
-//    public String getpubFolder(int id){
-//        List<Folder> folders = folderService.selNotPrivateFolderByUserId(id);
-//        return ReturnUtil.retJson(folders);
-//    }
-//
     @GetMapping("/file")
     public String getpubFile(int id){
-//        Items items = itemService.selItemByItemsId(fileId);
-//        Folder folder = folderService.selFolderByFolderId(items.getFolderId());
-//
-//        List<Items> list = null;
-//        switch (folder.getType()){
-//            case Folder.PRIVATE :
-//                return ReturnUtil.retJson(ServerStatus.FORBIDDEN);
-//            case Folder.PROTECTED:
-//                if(password==null)
-//                    return ReturnUtil.retJson(ServerStatus.NULL_PARAM);
-//                if(!folder.getPassword().equals(bCryptPasswordEncoder.encode(password)))
-//                    return ReturnUtil.retJson(ServerStatus.PARAM_ERROR);
-//            case Folder.PUBLIC:
-//                list = itemService.selItemByFolderId(folder.getFolderId());
-//        }
         List<Items> list = itemService.selItemByUserId(id);
         if(list!=null)
             return ReturnUtil.retJson(list);
         return ReturnUtil.retJson(ServerStatus.SERVER_ERROR);
     }
 
-//    @GetMapping("/admin/down/{id}")
-//    public void adminDownload(@PathVariable("id") Integer id, int userId, HttpServletResponse response){
-//        Items items = itemService.selItemByItemsId(id);
-//
-//        Folder folder = folderService.selFolderByFolderId(items.getFolderId());
-//
-//        if(folder.getUserId() != userId){
-//            response.setStatus(403);
-//            return;
-//        }
-//
-//        ReturnUtil.retFile(response,items,path);
-//    }
 }

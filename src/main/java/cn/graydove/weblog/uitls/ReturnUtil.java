@@ -17,7 +17,6 @@ public class ReturnUtil {
 
 
     private final static ObjectMapper objectMapper = new ObjectMapper();
-    //private final static String[] suffix = {"png","jpg","gif","jpeg","bmp"};
 
     public static void retFile(HttpServletResponse response, Items items, String path){
 
@@ -34,20 +33,6 @@ public class ReturnUtil {
             }
         }else
             return;
-//        if(items.getFormat()!=null){
-//            for (String s:suffix){
-//                if(s.equalsIgnoreCase(items.getFormat())){
-//                    try {
-//                        log.info("image:"+file.getAbsolutePath());
-//                        BufferedImage img = ImageIO.read(new FileInputStream(file));
-//                        ImageIO.write(img, s, response.getOutputStream());
-//                    } catch (IOException e) {
-//                        log.error(e.toString(),e);
-//                    }
-//                    return;
-//                }
-//            }
-//        }
 
         try {
             response.setHeader("content-type", "application/octet-stream");

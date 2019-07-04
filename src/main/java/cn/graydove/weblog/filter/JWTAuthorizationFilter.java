@@ -41,7 +41,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 //                }
 //            }
             //没有Authorization信息则直接放行了
-            if (tokenHeader == null){
+            if (tokenHeader == null || tokenHeader.equals("")){
                 chain.doFilter(request, response);
                 return;
             }
@@ -49,8 +49,14 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         log.info(tokenHeader);
 
         // 如果请求头中有token，则进行解析，并且设置认证信息
-        Map<String, String> map = getUserInfo(tokenHeader);
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(map.get("username"));
+        Map<String, String> map;
+        UsernamePasswordAuthenticationToken authentication;
+        try {
+            map = getUserInfo(tokenHeader);
+            authentication = getAuthentication(map.get("username"));
+        }catch (Exception e){
+            return;
+        }
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String userId = map.get("id");

@@ -8,6 +8,11 @@ spring:
     username: root
     password: Du87688524
 
+  # 文件上传限制
+  servlet:
+      multipart:
+        max-file-size: 30MB
+        max-request-size: 30MB
 
   # 事务回滚
   transaction:
